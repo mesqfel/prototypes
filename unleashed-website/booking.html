@@ -192,6 +192,9 @@
         opt.classList.remove('service-option--selected');
       });
       el.classList.add('service-option--selected');
+      if (window.innerWidth <= 768) {
+        document.querySelector('.booking-form').scrollIntoView({ behavior: 'smooth' });
+      }
     }
   </script>
 
