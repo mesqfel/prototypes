@@ -193,7 +193,10 @@
       });
       el.classList.add('service-option--selected');
       if (window.innerWidth <= 768) {
-        document.querySelector('.booking-form').scrollIntoView({ behavior: 'smooth' });
+        var target = document.querySelector('.booking-form');
+        var navHeight = document.querySelector('.nav').offsetHeight;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+        window.scrollTo({ top: top, behavior: 'smooth' });
       }
     }
   </script>
