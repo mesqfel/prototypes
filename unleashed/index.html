@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Unleashed - Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { display: none; }
+    body { scrollbar-width: none; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+const { useState } = React;
+
+const COLORS = {
+  primary: "#1B65A7",
+  primaryDark: "#0F4C81",
+  primaryLight: "#E8F1FA",
+  primaryMuted: "#94BAD9",
+  accent: "#F59E0B",
+  accentLight: "#FEF3C7",
+  bg: "#F6F8FB",
+  card: "#FFFFFF",
+  text: "#1A2B3D",
+  textSecondary: "#6B7D91",
+  textMuted: "#A0AEC0",
+  border: "#E2E8F0",
+  borderLight: "#F0F3F7",
+  success: "#10B981",
+  successLight: "#D1FAE5",
+  danger: "#EF4444",
+  dangerLight: "#FEE2E2",
+  white: "#FFFFFF",
+};
+
+const mockClients = [
+  { id: "1", name: "Sarah Mitchell", email: "sarah@email.com", phone: "0412 345 678", dogs: ["1", "2", "7", "8"], avatar: "SM" },
+  { id: "2", name: "James Cooper", email: "james@email.com", phone: "0423 456 789", dogs: ["3"], avatar: "JC" },
+  { id: "3", name: "Emily Zhang", email: "emily@email.com", phone: "0434 567 890", dogs: ["4", "5"], avatar: "EZ" },
+  { id: "4", name: "Michael Torres", email: "michael@email.com", phone: "0445 678 901", dogs: ["6"], avatar: "MT" },
+];
+
+const mockDogs = [
+  { id: "1", name: "Luna", breed: "Golden Retriever", age: 3, ownerId: "1", temperament: "Friendly, energetic, loves other dogs", medicalNotes: "Allergy to chicken-based treats", behavioralNotes: "Responds well to positive reinforcement. Pulls on leash sometimes.", photoColor: "#F59E0B" },
+  { id: "2", name: "Max", breed: "German Shepherd", age: 5, ownerId: "1", temperament: "Protective, calm, well-trained", medicalNotes: "Hip dysplasia — avoid high jumps", behavioralNotes: "Excellent recall. Needs slow introduction to new dogs.", photoColor: "#3B82F6" },
+  { id: "3", name: "Bella", breed: "French Bulldog", age: 2, ownerId: "2", temperament: "Playful, stubborn, food-motivated", medicalNotes: "Brachycephalic — monitor breathing in heat", behavioralNotes: "Working on 'stay' command. Gets distracted easily.", photoColor: "#EC4899" },
+  { id: "4", name: "Charlie", breed: "Labrador", age: 4, ownerId: "3", temperament: "Gentle, great with kids, high energy", medicalNotes: "None", behavioralNotes: "Strong swimmer. Loves fetch. Solid on all basic commands.", photoColor: "#10B981" },
+  { id: "5", name: "Daisy", breed: "Cavalier King Charles", age: 6, ownerId: "3", temperament: "Shy initially, very affectionate once comfortable", medicalNotes: "Heart murmur — regular vet checks", behavioralNotes: "Anxious around loud noises. Prefers quiet walks.", photoColor: "#8B5CF6" },
+  { id: "6", name: "Rocky", breed: "Boxer", age: 3, ownerId: "4", temperament: "Energetic, goofy, loves people", medicalNotes: "None", behavioralNotes: "Jumping on people — working on correction. Great with recall.", photoColor: "#F97316" },
+  { id: "7", name: "Cooper", breed: "Border Collie", age: 2, ownerId: "1", temperament: "Highly intelligent, eager to please", medicalNotes: "None", behavioralNotes: "Excellent at agility. Needs mental stimulation daily.", photoColor: "#6366F1" },
+  { id: "8", name: "Willow", breed: "Poodle", age: 4, ownerId: "1", temperament: "Gentle, curious, good with children", medicalNotes: "Sensitive stomach — special diet required", behavioralNotes: "Very responsive to commands. Calm on walks.", photoColor: "#14B8A6" },
+];
+
+const mockSessions = [
+  { id: "1", dogId: "1", dogName: "Luna", type: "WALK", date: "2026-02-12T08:00:00", durationMinutes: 45, trainerId: "admin", trainerName: "Alex", notes: "Great walk today! Luna was very responsive to leash commands. We practiced heel position and she maintained it for about 70% of the walk. Played with two other dogs at the park — very social.", photos: 3 },
+  { id: "2", dogId: "3", dogName: "Bella", type: "TRAINING", date: "2026-02-12T10:00:00", durationMinutes: 30, trainerId: "admin", trainerName: "Alex", notes: "Worked on 'stay' command. Bella can now hold for 8 seconds consistently. Used high-value treats (cheese) which improved focus significantly. Next session: increase duration to 12 seconds.", photos: 2 },
+  { id: "3", dogId: "4", dogName: "Charlie", type: "WALK", date: "2026-02-12T14:00:00", durationMinutes: 60, trainerId: "admin", trainerName: "Alex", notes: "Long walk along the creek trail. Charlie was excellent off-leash in the designated area. Practiced recall 5 times — 100% success rate. Very happy and tired by the end!", photos: 4 },
+  { id: "4", dogId: "1", dogName: "Luna", type: "TRAINING", date: "2026-02-11T09:00:00", durationMinutes: 40, trainerId: "admin", trainerName: "Alex", notes: "Focus session on loose-leash walking. Introduced the 'touch' command as a redirect technique. Luna picked it up quickly — she's very food-motivated. Homework: practice 'touch' 5 times before meals.", photos: 1 },
+  { id: "5", dogId: "6", dogName: "Rocky", type: "TRAINING", date: "2026-02-11T11:00:00", durationMinutes: 35, trainerId: "admin", trainerName: "Alex", notes: "Jumping correction session. Using the 'four on the floor' method. Rocky is improving — jumped only 3 times today vs 8 last session. Owner needs to be consistent at home.", photos: 2 },
+  { id: "6", dogId: "5", dogName: "Daisy", type: "WALK", date: "2026-02-11T15:00:00", durationMinutes: 30, trainerId: "admin", trainerName: "Alex", notes: "Quiet neighbourhood walk. Daisy was a bit nervous at the start but settled after 10 minutes. Avoided the construction zone. She walked well beside me the whole time.", photos: 2 },
+  { id: "7", dogId: "2", dogName: "Max", type: "WALK", date: "2026-02-10T08:30:00", durationMinutes: 50, trainerId: "admin", trainerName: "Alex", notes: "Morning walk with controlled dog introductions. Max met a new Labrador — initial tension but calmed down after parallel walking. Good progress on socialization.", photos: 3 },
+  { id: "8", dogId: "3", dogName: "Bella", type: "TRAINING", date: "2026-02-10T10:30:00", durationMinutes: 30, trainerId: "admin", trainerName: "Alex", notes: "Continued 'stay' training. Also introduced 'leave it' command. Bella struggles with impulse control but showed improvement by end of session.", photos: 1 },
+];
+
+const todaySessions = mockSessions.filter(s => s.date.startsWith("2026-02-12"));
+const upcomingSessions = [
+  { id: "u1", dogId: "2", dogName: "Max", type: "WALK", date: "2026-02-12T16:00:00", durationMinutes: 45, trainerName: "Alex" },
+  { id: "u2", dogId: "5", dogName: "Daisy", type: "TRAINING", date: "2026-02-13T09:00:00", durationMinutes: 30, trainerName: "Alex" },
+  { id: "u3", dogId: "6", dogName: "Rocky", type: "TRAINING", date: "2026-02-13T11:00:00", durationMinutes: 35, trainerName: "Alex" },
+];
+
+const DogAvatar = ({ name, color, size = 44 }) => (
+  <div style={{
+    width: size, height: size, borderRadius: size / 2,
+    background: `linear-gradient(135deg, ${color}, ${color}dd)`,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    color: "#fff", fontWeight: 700, fontSize: size * 0.35,
+    fontFamily: "'DM Sans', sans-serif", flexShrink: 0,
+    boxShadow: `0 2px 8px ${color}44`,
+  }}>
+    {name.charAt(0)}
+  </div>
+);
+
+const UserAvatar = ({ initials, size = 40 }) => (
+  <div style={{
+    width: size, height: size, borderRadius: size / 2,
+    background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.primaryDark})`,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    color: "#fff", fontWeight: 600, fontSize: size * 0.33,
+    fontFamily: "'DM Sans', sans-serif", flexShrink: 0,
+  }}>
+    {initials}
+  </div>
+);
+
+const Badge = ({ type }) => {
+  const isWalk = type === "WALK";
+  return (
+    <span style={{
+      display: "inline-flex", alignItems: "center", gap: 4,
+      padding: "3px 10px", borderRadius: 20,
+      background: isWalk ? COLORS.successLight : COLORS.accentLight,
+      color: isWalk ? "#065F46" : "#92400E",
+      fontSize: 11, fontWeight: 600, letterSpacing: 0.3,
+      fontFamily: "'DM Sans', sans-serif",
+    }}>
+      {isWalk ? "🐕 Walk" : "🎯 Training"}
+    </span>
+  );
+};
+
+const StatCard = ({ icon, value, label, onClick }) => (
+  <div onClick={onClick} style={{
+    flex: 1, background: COLORS.card, borderRadius: 16, padding: "18px 16px",
+    display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
+    border: `1px solid ${COLORS.borderLight}`,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+    cursor: onClick ? "pointer" : "default",
+  }}>
+    <span style={{ fontSize: 22 }}>{icon}</span>
+    <span style={{ fontSize: 24, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{value}</span>
+    <span style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.2 }}>{label}</span>
+  </div>
+);
+
+const TabBar = ({ activeTab, onTabChange, tabs }) => (
+  <div style={{
+    display: "flex", background: COLORS.card,
+    borderTop: `1px solid ${COLORS.border}`,
+    padding: "6px 0 env(safe-area-inset-bottom, 8px) 0",
+  }}>
+    {tabs.map(tab => (
+      <button key={tab.id} onClick={() => onTabChange(tab.id)} style={{
+        flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
+        gap: 2, padding: "8px 0", background: "none", border: "none", cursor: "pointer",
+        opacity: activeTab === tab.id ? 1 : 0.45,
+        transition: "opacity 0.2s",
+      }}>
+        <span style={{ fontSize: 20 }}>{tab.icon}</span>
+        <span style={{
+          fontSize: 10, fontWeight: activeTab === tab.id ? 700 : 500,
+          color: activeTab === tab.id ? COLORS.primary : COLORS.textSecondary,
+          fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.2,
+        }}>{tab.label}</span>
+      </button>
+    ))}
+  </div>
+);
+
+const Header = ({ title, subtitle, rightAction, onBack, showLogo }) => (
+  <div style={{
+    padding: "12px 20px 12px", background: COLORS.card,
+    borderBottom: `1px solid ${COLORS.borderLight}`,
+    display: "flex", alignItems: "center", gap: 12,
+  }}>
+    {onBack && (
+      <button onClick={onBack} style={{
+        background: "none", border: "none", cursor: "pointer",
+        fontSize: 18, color: COLORS.primary, padding: "4px 0", display: "flex",
+      }}>←</button>
+    )}
+    <div style={{ flex: 1, display: "flex", alignItems: showLogo ? "center" : "flex-start", justifyContent: showLogo ? "center" : "flex-start", flexDirection: showLogo ? "row" : "column" }}>
+      {showLogo ? (
+        <img src={LOGO} alt="Unleashed" style={{ height: 32, objectFit: "contain" }} />
+      ) : (
+        <>
+          <div style={{ fontSize: 18, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{title}</div>
+          {subtitle && <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 1 }}>{subtitle}</div>}
+        </>
+      )}
+    </div>
+    {rightAction}
+  </div>
+);
+
+const formatTime = (dateStr) => {
+  const d = new Date(dateStr);
+  return d.toLocaleTimeString("en-AU", { hour: "2-digit", minute: "2-digit", hour12: true });
+};
+
+const formatDate = (dateStr) => {
+  const d = new Date(dateStr);
+  const today = new Date("2026-02-12");
+  const yesterday = new Date("2026-02-11");
+  if (d.toDateString() === today.toDateString()) return "Today";
+  if (d.toDateString() === yesterday.toDateString()) return "Yesterday";
+  return d.toLocaleDateString("en-AU", { day: "numeric", month: "short" });
+};
+
+// ============ ADMIN SCREENS ============
+
+const AdminDashboard = ({ onNavigate }) => (
+  <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 20 }}>
+    <div>
+      <div style={{ fontSize: 14, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Wednesday, 12 Feb</div>
+      <div style={{ fontSize: 24, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+        G'day, Eric 👋
+      </div>
+    </div>
+
+    <div style={{ display: "flex", gap: 10 }}>
+      <StatCard icon="🐾" value={mockDogs.length} label="Active Dogs" />
+      <StatCard icon="📋" value={todaySessions.length + upcomingSessions.filter(s => s.date.startsWith("2026-02-12")).length} label="Today" onClick={() => onNavigate("todaySessions")} />
+      <StatCard icon="👥" value={mockClients.length} label="Clients" />
+    </div>
+
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <span style={{ fontSize: 16, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>Today's Sessions</span>
+        <span onClick={() => onNavigate("todaySessions")} style={{ fontSize: 12, color: COLORS.primary, fontFamily: "'DM Sans', sans-serif", fontWeight: 600, cursor: "pointer" }}>See all</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {todaySessions.map(session => {
+          const dog = mockDogs.find(d => d.id === session.dogId);
+          return (
+            <div key={session.id} onClick={() => onNavigate("sessionDetail", { sessionId: session.id })} style={{
+              background: COLORS.card, borderRadius: 14, padding: "14px 16px",
+              display: "flex", alignItems: "center", gap: 14, cursor: "pointer",
+              border: `1px solid ${COLORS.borderLight}`,
+              boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+              transition: "transform 0.15s",
+            }}>
+              <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={42} />
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                  <Badge type={session.type} />
+                </div>
+                <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                  {formatTime(session.date)} · {session.durationMinutes}min
+                </div>
+              </div>
+              <span style={{ fontSize: 12, color: COLORS.success, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>✓ Done</span>
+            </div>
+          );
+        })}
+
+        {upcomingSessions.filter(s => s.date.startsWith("2026-02-12")).map(session => {
+          const dog = mockDogs.find(d => d.id === session.dogId);
+          return (
+            <div key={session.id} style={{
+              background: COLORS.card, borderRadius: 14, padding: "14px 16px",
+              display: "flex", alignItems: "center", gap: 14,
+              border: `1px dashed ${COLORS.primaryMuted}`,
+              opacity: 0.8,
+            }}>
+              <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={42} />
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                  <Badge type={session.type} />
+                </div>
+                <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                  {formatTime(session.date)} · {session.durationMinutes}min
+                </div>
+              </div>
+              <span style={{ fontSize: 12, color: COLORS.accent, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>Upcoming</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <span style={{ fontSize: 16, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>Upcoming</span>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {upcomingSessions.filter(s => !s.date.startsWith("2026-02-12")).map(session => {
+          const dog = mockDogs.find(d => d.id === session.dogId);
+          return (
+            <div key={session.id} style={{
+              background: COLORS.card, borderRadius: 14, padding: "14px 16px",
+              display: "flex", alignItems: "center", gap: 14,
+              border: `1px solid ${COLORS.borderLight}`,
+              boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+            }}>
+              <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={42} />
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                  <Badge type={session.type} />
+                </div>
+                <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                  Tomorrow · {formatTime(session.date)} · {session.durationMinutes}min
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+);
+
+const ClientsList = ({ onNavigate }) => (
+  <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 10 }}>
+    <div style={{
+      display: "flex", background: COLORS.borderLight, borderRadius: 12, padding: "10px 14px",
+      alignItems: "center", gap: 10, marginBottom: 6,
+    }}>
+      <span style={{ color: COLORS.textMuted, fontSize: 14 }}>🔍</span>
+      <span style={{ color: COLORS.textMuted, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>Search clients...</span>
+    </div>
+
+    {mockClients.map(client => {
+      const clientDogs = mockDogs.filter(d => d.ownerId === client.id);
+      return (
+        <div key={client.id} onClick={() => onNavigate("clientDetail", { clientId: client.id })} style={{
+          background: COLORS.card, borderRadius: 14, padding: "16px",
+          display: "flex", alignItems: "center", gap: 14, cursor: "pointer",
+          border: `1px solid ${COLORS.borderLight}`,
+          boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+        }}>
+          <UserAvatar initials={client.avatar} />
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{client.name}</div>
+            <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3, display: "flex", alignItems: "center", gap: 6 }}>
+              <span>{clientDogs.length} {clientDogs.length === 1 ? "dog" : "dogs"}</span>
+              <span>·</span>
+              <span>{clientDogs.map(d => d.name).join(", ")}</span>
+            </div>
+          </div>
+          <span style={{ color: COLORS.textMuted, fontSize: 16 }}>›</span>
+        </div>
+      );
+    })}
+  </div>
+);
+
+const DogsList = ({ onNavigate, filterOwnerId = null }) => {
+  const dogs = filterOwnerId ? mockDogs.filter(d => d.ownerId === filterOwnerId) : mockDogs;
+  return (
+    <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 10 }}>
+      {!filterOwnerId && (
+        <div style={{
+          display: "flex", background: COLORS.borderLight, borderRadius: 12, padding: "10px 14px",
+          alignItems: "center", gap: 10, marginBottom: 6,
+        }}>
+          <span style={{ color: COLORS.textMuted, fontSize: 14 }}>🔍</span>
+          <span style={{ color: COLORS.textMuted, fontSize: 14, fontFamily: "'DM Sans', sans-serif" }}>Search dogs...</span>
+        </div>
+      )}
+
+      {dogs.map(dog => {
+        const owner = mockClients.find(c => c.id === dog.ownerId);
+        const dogSessions = mockSessions.filter(s => s.dogId === dog.id);
+        const lastSession = dogSessions[0];
+        return (
+          <div key={dog.id} onClick={() => onNavigate("dogDetail", { dogId: dog.id })} style={{
+            background: COLORS.card, borderRadius: 14, padding: "16px",
+            display: "flex", alignItems: "center", gap: 14, cursor: "pointer",
+            border: `1px solid ${COLORS.borderLight}`,
+            boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+          }}>
+            <DogAvatar name={dog.name} color={dog.photoColor} size={48} />
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 15, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{dog.name}</span>
+              </div>
+              <div style={{ fontSize: 12, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+                {dog.breed} · {dog.age}y
+              </div>
+              <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                {lastSession ? `Last: ${formatDate(lastSession.date)} — ${lastSession.type === "WALK" ? "Walk" : "Training"}` : "No sessions yet"}
+              </div>
+            </div>
+            {!filterOwnerId && (
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>{owner?.name}</div>
+              </div>
+            )}
+            <span style={{ color: COLORS.textMuted, fontSize: 16 }}>›</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const DogDetail = ({ dogId, onNavigate, isAdmin = true }) => {
+  const [activeInfoTab, setActiveInfoTab] = useState("info");
+  const dog = mockDogs.find(d => d.id === dogId);
+  const owner = mockClients.find(c => c.id === dog?.ownerId);
+  const dogSessions = mockSessions.filter(s => s.dogId === dogId);
+
+  if (!dog) return null;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${dog.photoColor}22, ${dog.photoColor}08)`,
+        padding: "24px 20px", display: "flex", alignItems: "center", gap: 18,
+      }}>
+        <DogAvatar name={dog.name} color={dog.photoColor} size={72} />
+        <div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{dog.name}</div>
+          <div style={{ fontSize: 14, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+            {dog.breed} · {dog.age} years old
+          </div>
+          <div style={{ fontSize: 13, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>
+            Owner: {owner?.name}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", borderBottom: `1px solid ${COLORS.border}` }}>
+        {["info", "sessions"].map(tab => (
+          <button key={tab} onClick={() => setActiveInfoTab(tab)} style={{
+            flex: 1, padding: "12px", background: "none", border: "none", cursor: "pointer",
+            borderBottom: activeInfoTab === tab ? `2px solid ${COLORS.primary}` : "2px solid transparent",
+            color: activeInfoTab === tab ? COLORS.primary : COLORS.textMuted,
+            fontWeight: 600, fontSize: 13, fontFamily: "'DM Sans', sans-serif",
+            textTransform: "capitalize",
+          }}>{tab === "info" ? "Profile" : `Sessions (${dogSessions.length})`}</button>
+        ))}
+      </div>
+
+      <div style={{ padding: "20px", overflowY: "auto" }}>
+        {activeInfoTab === "info" ? (
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <InfoSection icon="💛" title="Temperament" content={dog.temperament} />
+            <InfoSection icon="🏥" title="Medical Notes" content={dog.medicalNotes || "No medical notes"} />
+            <InfoSection icon="📝" title="Behavioral Notes" content={dog.behavioralNotes} />
+          </div>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {dogSessions.map(session => (
+              <div key={session.id} onClick={() => onNavigate("sessionDetail", { sessionId: session.id })} style={{
+                background: COLORS.card, borderRadius: 12, padding: "14px 16px", cursor: "pointer",
+                border: `1px solid ${COLORS.borderLight}`,
+              }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <Badge type={session.type} />
+                    <span style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>
+                      {formatDate(session.date)} · {formatTime(session.date)}
+                    </span>
+                  </div>
+                  {session.photos > 0 && (
+                    <span style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>📷 {session.photos}</span>
+                  )}
+                </div>
+                <div style={{
+                  fontSize: 13, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif",
+                  marginTop: 8, lineHeight: 1.5,
+                  display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+                }}>
+                  {session.notes}
+                </div>
+                <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 6 }}>
+                  {session.durationMinutes}min · by {session.trainerName}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const InfoSection = ({ icon, title, content }) => (
+  <div style={{
+    background: COLORS.card, borderRadius: 12, padding: "14px 16px",
+    border: `1px solid ${COLORS.borderLight}`,
+  }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+      <span>{icon}</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{title}</span>
+    </div>
+    <div style={{ fontSize: 13, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.6 }}>
+      {content}
+    </div>
+  </div>
+);
+
+const SessionDetail = ({ sessionId }) => {
+  const session = mockSessions.find(s => s.id === sessionId);
+  if (!session) return null;
+  const dog = mockDogs.find(d => d.id === session.dogId);
+  const owner = mockClients.find(c => c.id === dog?.ownerId);
+
+  return (
+    <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${dog?.photoColor}15, ${dog?.photoColor}05)`,
+        borderRadius: 16, padding: "18px", display: "flex", alignItems: "center", gap: 14,
+        border: `1px solid ${dog?.photoColor}20`,
+      }}>
+        <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={56} />
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 18, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+            <Badge type={session.type} />
+          </div>
+          <div style={{ fontSize: 13, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>
+            {formatDate(session.date)} · {formatTime(session.date)} · {session.durationMinutes}min
+          </div>
+          <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+            Trainer: {session.trainerName} · Owner: {owner?.name}
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        background: COLORS.card, borderRadius: 14, padding: "16px",
+        border: `1px solid ${COLORS.borderLight}`,
+      }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 10 }}>
+          📝 Session Notes
+        </div>
+        <div style={{ fontSize: 14, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", lineHeight: 1.7 }}>
+          {session.notes}
+        </div>
+      </div>
+
+      {session.photos > 0 && (
+        <div style={{
+          background: COLORS.card, borderRadius: 14, padding: "16px",
+          border: `1px solid ${COLORS.borderLight}`,
+        }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 12 }}>
+            📷 Photos ({session.photos})
+          </div>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {Array.from({ length: session.photos }).map((_, i) => (
+              <div key={i} style={{
+                width: 80, height: 80, borderRadius: 10,
+                background: `linear-gradient(135deg, ${dog?.photoColor}30, ${dog?.photoColor}15)`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                border: `1px solid ${dog?.photoColor}20`,
+              }}>
+                <span style={{ fontSize: 24 }}>🐕</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ClientDetail = ({ clientId, onNavigate }) => {
+  const client = mockClients.find(c => c.id === clientId);
+  if (!client) return null;
+  const clientDogs = mockDogs.filter(d => d.ownerId === clientId);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${COLORS.primaryLight}, ${COLORS.bg})`,
+        padding: "24px 20px", display: "flex", alignItems: "center", gap: 18,
+      }}>
+        <UserAvatar initials={client.avatar} size={64} />
+        <div>
+          <div style={{ fontSize: 20, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{client.name}</div>
+          <div style={{ fontSize: 13, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 4 }}>
+            📧 {client.email}
+          </div>
+          <div style={{ fontSize: 13, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+            📱 {client.phone}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ padding: "20px" }}>
+        <div style={{ fontSize: 15, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 12 }}>
+          Dogs
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {clientDogs.map(dog => {
+            const dogSessions = mockSessions.filter(s => s.dogId === dog.id);
+            return (
+              <div key={dog.id} onClick={() => onNavigate("dogDetail", { dogId: dog.id })} style={{
+                background: COLORS.card, borderRadius: 14, padding: "16px",
+                display: "flex", alignItems: "center", gap: 14, cursor: "pointer",
+                border: `1px solid ${COLORS.borderLight}`,
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+              }}>
+                <DogAvatar name={dog.name} color={dog.photoColor} size={48} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: 15, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{dog.name}</div>
+                  <div style={{ fontSize: 12, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+                    {dog.breed} · {dog.age}y · {dogSessions.length} sessions
+                  </div>
+                </div>
+                <span style={{ color: COLORS.textMuted, fontSize: 16 }}>›</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TodaySessions = ({ onNavigate }) => {
+  const completedSessions = todaySessions;
+  const todayUpcoming = upcomingSessions.filter(s => s.date.startsWith("2026-02-12"));
+  const allSessions = [...completedSessions, ...todayUpcoming];
+
+  return (
+    <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 16 }}>
+      <div style={{
+        background: COLORS.card, borderRadius: 14, padding: "16px",
+        border: `1px solid ${COLORS.borderLight}`,
+        display: "flex", justifyContent: "space-around", textAlign: "center",
+      }}>
+        <div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{allSessions.length}</div>
+          <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Total</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: COLORS.success, fontFamily: "'DM Sans', sans-serif" }}>{completedSessions.length}</div>
+          <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Completed</div>
+        </div>
+        <div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: COLORS.accent, fontFamily: "'DM Sans', sans-serif" }}>{todayUpcoming.length}</div>
+          <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Upcoming</div>
+        </div>
+      </div>
+
+      {completedSessions.length > 0 && (
+        <div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 10 }}>
+            Completed
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {completedSessions.map(session => {
+              const dog = mockDogs.find(d => d.id === session.dogId);
+              return (
+                <div key={session.id} onClick={() => onNavigate("sessionDetail", { sessionId: session.id })} style={{
+                  background: COLORS.card, borderRadius: 14, padding: "14px 16px",
+                  display: "flex", alignItems: "center", gap: 14, cursor: "pointer",
+                  border: `1px solid ${COLORS.borderLight}`,
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+                }}>
+                  <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={42} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                      <Badge type={session.type} />
+                    </div>
+                    <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                      {formatTime(session.date)} · {session.durationMinutes}min · by {session.trainerName}
+                    </div>
+                  </div>
+                  <span style={{ fontSize: 12, color: COLORS.success, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>✓ Done</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {todayUpcoming.length > 0 && (
+        <div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginBottom: 10 }}>
+            Upcoming
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {todayUpcoming.map(session => {
+              const dog = mockDogs.find(d => d.id === session.dogId);
+              return (
+                <div key={session.id} style={{
+                  background: COLORS.card, borderRadius: 14, padding: "14px 16px",
+                  display: "flex", alignItems: "center", gap: 14,
+                  border: `1px dashed ${COLORS.primaryMuted}`,
+                  opacity: 0.8,
+                }}>
+                  <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={42} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                      <Badge type={session.type} />
+                    </div>
+                    <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                      {formatTime(session.date)} · {session.durationMinutes}min · by {session.trainerName}
+                    </div>
+                  </div>
+                  <span style={{ fontSize: 12, color: COLORS.accent, fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>Upcoming</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ============ CLIENT SCREENS ============
+
+const ClientHome = ({ onNavigate }) => {
+  const client = mockClients[0]; // Sarah Mitchell
+  const clientDogs = mockDogs.filter(d => d.ownerId === client.id);
+  const recentSessions = mockSessions.filter(s => clientDogs.some(d => d.id === s.dogId)).slice(0, 3);
+
+  return (
+    <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 20 }}>
+      <div>
+        <div style={{ fontSize: 14, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif" }}>Welcome back</div>
+        <div style={{ fontSize: 24, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+          Hi, {client.name.split(" ")[0]} 👋
+        </div>
+      </div>
+
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>My Dogs</span>
+          <span onClick={() => onNavigate("clientDogs")} style={{ fontSize: 12, color: COLORS.primary, fontFamily: "'DM Sans', sans-serif", fontWeight: 600, cursor: "pointer" }}>See all</span>
+        </div>
+        <div style={{
+          display: "flex", gap: 12, overflowX: "auto", paddingBottom: 4,
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          msOverflowStyle: "none", scrollbarWidth: "none",
+        }}>
+          {clientDogs.map(dog => (
+            <div key={dog.id} onClick={() => onNavigate("dogDetail", { dogId: dog.id })} style={{
+              minWidth: 140, maxWidth: 140, background: COLORS.card, borderRadius: 16, padding: "20px 16px",
+              display: "flex", flexDirection: "column", alignItems: "center", gap: 10, cursor: "pointer",
+              border: `1px solid ${COLORS.borderLight}`,
+              boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+              scrollSnapAlign: "start",
+              flexShrink: 0,
+            }}>
+              <DogAvatar name={dog.name} color={dog.photoColor} size={56} />
+              <div style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{dog.name}</div>
+                <div style={{ fontSize: 11, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+                  {dog.breed}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>Recent Sessions</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {recentSessions.map(session => {
+            const dog = mockDogs.find(d => d.id === session.dogId);
+            return (
+              <div key={session.id} onClick={() => onNavigate("sessionDetail", { sessionId: session.id })} style={{
+                background: COLORS.card, borderRadius: 14, padding: "14px 16px", cursor: "pointer",
+                border: `1px solid ${COLORS.borderLight}`,
+                boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <DogAvatar name={dog?.name || "?"} color={dog?.photoColor || "#999"} size={38} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{session.dogName}</span>
+                      <Badge type={session.type} />
+                    </div>
+                    <div style={{ fontSize: 12, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 3 }}>
+                      {formatDate(session.date)} · {session.durationMinutes}min
+                      {session.photos > 0 && ` · 📷 ${session.photos}`}
+                    </div>
+                  </div>
+                  <span style={{ color: COLORS.textMuted, fontSize: 14 }}>›</span>
+                </div>
+                <div style={{
+                  fontSize: 12, color: COLORS.textSecondary, fontFamily: "'DM Sans', sans-serif",
+                  marginTop: 8, lineHeight: 1.5, paddingLeft: 50,
+                  display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+                }}>
+                  {session.notes}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ============ MAIN APP ============
+
+const LOGO = "./assets/logo.png";
+
+const LoginScreen = ({ onLogin }) => (
+  <div style={{
+    height: "100%", display: "flex", flexDirection: "column",
+    justifyContent: "center", padding: "40px 28px",
+    background: "#FFFFFF",
+  }}>
+    <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <img src={LOGO} alt="Unleashed" style={{ height: 88, marginBottom: 12, objectFit: "contain", display: "block", margin: "0 auto 12px auto" }} />
+      <div style={{
+        fontSize: 32, fontWeight: 800, color: "#111111",
+        fontFamily: "'DM Sans', sans-serif", letterSpacing: -0.5,
+      }}>Unleashed</div>
+      <div style={{
+        fontSize: 14, color: "#999999",
+        fontFamily: "'DM Sans', sans-serif", marginTop: 4,
+      }}>Dog Training & Walking</div>
+    </div>
+
+    <div style={{
+      background: "#FFFFFF", borderRadius: 20, padding: "28px 24px",
+      border: "1px solid #E5E5E5",
+      display: "flex", flexDirection: "column", gap: 14,
+    }}>
+      <div>
+        <label style={{ fontSize: 12, fontWeight: 600, color: "#888888", fontFamily: "'DM Sans', sans-serif", marginBottom: 6, display: "block" }}>Email</label>
+        <div style={{
+          background: "#FAFAFA", borderRadius: 10, padding: "12px 14px",
+          border: "1px solid #E5E5E5", fontSize: 14,
+          color: "#AAAAAA", fontFamily: "'DM Sans', sans-serif",
+        }}>&#8203;</div>
+      </div>
+      <div>
+        <label style={{ fontSize: 12, fontWeight: 600, color: "#888888", fontFamily: "'DM Sans', sans-serif", marginBottom: 6, display: "block" }}>Password</label>
+        <div style={{
+          background: "#FAFAFA", borderRadius: 10, padding: "12px 14px",
+          border: "1px solid #E5E5E5", fontSize: 14,
+          color: "#AAAAAA", fontFamily: "'DM Sans', sans-serif",
+        }}>&#8203;</div>
+      </div>
+      <button onClick={() => onLogin("admin")} style={{
+        background: "#111111",
+        color: "#FFFFFF", border: "none", borderRadius: 12,
+        padding: "14px", fontSize: 15, fontWeight: 700, cursor: "pointer",
+        fontFamily: "'DM Sans', sans-serif", marginTop: 4,
+      }}>Sign In as Admin</button>
+      <button onClick={() => onLogin("client")} style={{
+        background: "none", color: "#111111", border: "1.5px solid #111111",
+        borderRadius: 12, padding: "12px", fontSize: 14, fontWeight: 600,
+        cursor: "pointer", fontFamily: "'DM Sans', sans-serif",
+      }}>Sign In as Client</button>
+    </div>
+  </div>
+);
+function UnleashedApp() {
+  const [mode, setMode] = useState(null); // null = login, "admin", "client"
+  const [screen, setScreen] = useState("dashboard");
+  const [screenParams, setScreenParams] = useState({});
+  const [adminTab, setAdminTab] = useState("dashboard");
+  const [clientTab, setClientTab] = useState("home");
+  const [navStack, setNavStack] = useState([]);
+
+  const navigate = (screenName, params = {}) => {
+    setNavStack(prev => [...prev, { screen, params: screenParams }]);
+    setScreen(screenName);
+    setScreenParams(params);
+  };
+
+  const goBack = () => {
+    const prev = navStack[navStack.length - 1];
+    if (prev) {
+      setNavStack(s => s.slice(0, -1));
+      setScreen(prev.screen);
+      setScreenParams(prev.params);
+    }
+  };
+
+  const handleLogin = (role) => {
+    setMode(role);
+    setScreen(role === "admin" ? "dashboard" : "clientHome");
+    setNavStack([]);
+  };
+
+  const handleTabChange = (tabId) => {
+    if (mode === "admin") {
+      setAdminTab(tabId);
+      setScreen(tabId);
+    } else {
+      setClientTab(tabId);
+      setScreen(tabId === "home" ? "clientHome" : tabId === "dogs" ? "clientDogs" : tabId);
+    }
+    setNavStack([]);
+    setScreenParams({});
+  };
+
+  const adminTabs = [
+    { id: "dashboard", icon: "🏠", label: "Home" },
+    { id: "clients", icon: "👥", label: "Clients" },
+    { id: "dogs", icon: "🐾", label: "Dogs" },
+    { id: "profile", icon: "⚙️", label: "Settings" },
+  ];
+
+  const clientTabs = [
+    { id: "home", icon: "🏠", label: "Home" },
+    { id: "dogs", icon: "🐾", label: "My Dogs" },
+    { id: "profile", icon: "⚙️", label: "Settings" },
+  ];
+
+  const getHeader = () => {
+    switch (screen) {
+      case "dashboard": return { showLogo: true };
+      case "clients": return { title: "Clients", subtitle: `${mockClients.length} active clients` };
+      case "dogs": return { title: "Dogs", subtitle: `${mockDogs.length} active dogs` };
+      case "clientHome": return { showLogo: true };
+      case "clientDogs": return { title: "My Dogs", subtitle: null };
+      case "dogDetail": {
+        const dog = mockDogs.find(d => d.id === screenParams.dogId);
+        return { title: dog?.name || "Dog", subtitle: null, back: true };
+      }
+      case "todaySessions": return { title: "Today's Sessions", subtitle: "Wednesday, 12 Feb", back: true };
+      case "sessionDetail": {
+        return { title: "Session Details", subtitle: null, back: true };
+      }
+      case "clientDetail": {
+        const client = mockClients.find(c => c.id === screenParams.clientId);
+        return { title: client?.name || "Client", subtitle: null, back: true };
+      }
+      case "profile": return { title: "Settings", subtitle: null };
+      default: return { title: "Unleashed", subtitle: null };
+    }
+  };
+
+  const renderScreen = () => {
+    switch (screen) {
+      case "dashboard": return <AdminDashboard onNavigate={navigate} />;
+      case "clients": return <ClientsList onNavigate={navigate} />;
+      case "dogs": return <DogsList onNavigate={navigate} />;
+      case "todaySessions": return <TodaySessions onNavigate={navigate} />;
+      case "dogDetail": return <DogDetail dogId={screenParams.dogId} onNavigate={navigate} isAdmin={mode === "admin"} />;
+      case "sessionDetail": return <SessionDetail sessionId={screenParams.sessionId} />;
+      case "clientDetail": return <ClientDetail clientId={screenParams.clientId} onNavigate={navigate} />;
+      case "clientHome": return <ClientHome onNavigate={navigate} />;
+      case "clientDogs": return <DogsList onNavigate={navigate} filterOwnerId="1" />;
+      case "profile": return (
+        <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{
+            background: COLORS.card, borderRadius: 16, padding: "20px",
+            display: "flex", alignItems: "center", gap: 16,
+            border: `1px solid ${COLORS.borderLight}`,
+          }}>
+            <UserAvatar initials={mode === "admin" ? "EM" : "SM"} size={56} />
+            <div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>
+                {mode === "admin" ? "Eric (Admin)" : "Sarah Mitchell"}
+              </div>
+              <div style={{ fontSize: 13, color: COLORS.textMuted, fontFamily: "'DM Sans', sans-serif", marginTop: 2 }}>
+                {mode === "admin" ? "eric@unleashed.com.au" : "sarah@email.com"}
+              </div>
+            </div>
+          </div>
+          {[
+            { icon: "", label: "Edit Profile" },
+            { icon: "", label: "Notifications" },
+            { icon: "", label: "Privacy & Security" },
+            { icon: "", label: "Help & Support" },
+          ].map((item, i) => (
+            <div key={i} style={{
+              background: COLORS.card, borderRadius: 12, padding: "14px 16px",
+              display: "flex", alignItems: "center", gap: 12,
+              border: `1px solid ${COLORS.borderLight}`, cursor: "pointer",
+            }}>
+              <span>{item.icon}</span>
+              <span style={{ flex: 1, fontSize: 14, color: COLORS.text, fontFamily: "'DM Sans', sans-serif" }}>{item.label}</span>
+              <span style={{ color: COLORS.textMuted }}>›</span>
+            </div>
+          ))}
+          <button onClick={() => { setMode(null); setScreen("login"); setNavStack([]); }} style={{
+            background: COLORS.dangerLight, color: COLORS.danger, border: "none",
+            borderRadius: 12, padding: "14px", fontSize: 14, fontWeight: 600,
+            cursor: "pointer", fontFamily: "'DM Sans', sans-serif", marginTop: 8,
+          }}>Sign Out</button>
+        </div>
+      );
+      default: return null;
+    }
+  };
+
+  const header = mode ? getHeader() : null;
+
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      minHeight: "100vh", background: "#E8ECF0", padding: "20px 0",
+      fontFamily: "'DM Sans', sans-serif",
+    }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+      {/* Mode switcher */}
+      {mode && (
+        <div style={{
+          display: "flex", gap: 8, marginBottom: 16, background: COLORS.card,
+          borderRadius: 12, padding: 4, boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+        }}>
+          <button onClick={() => { setMode("admin"); handleTabChange("dashboard"); setAdminTab("dashboard"); }} style={{
+            padding: "8px 20px", borderRadius: 10, border: "none", cursor: "pointer",
+            background: mode === "admin" ? COLORS.primary : "transparent",
+            color: mode === "admin" ? COLORS.white : COLORS.textSecondary,
+            fontWeight: 600, fontSize: 13, fontFamily: "'DM Sans', sans-serif",
+          }}>🔧 Admin View</button>
+          <button onClick={() => { setMode("client"); handleTabChange("home"); setClientTab("home"); }} style={{
+            padding: "8px 20px", borderRadius: 10, border: "none", cursor: "pointer",
+            background: mode === "client" ? COLORS.primary : "transparent",
+            color: mode === "client" ? COLORS.white : COLORS.textSecondary,
+            fontWeight: 600, fontSize: 13, fontFamily: "'DM Sans', sans-serif",
+          }}>👤 Client View</button>
+        </div>
+      )}
+
+      {/* Phone frame */}
+      <div style={{
+        width: 375, height: 740,
+        background: COLORS.bg,
+        borderRadius: 40, overflow: "hidden",
+        boxShadow: "0 16px 64px rgba(0,0,0,0.15), 0 0 0 8px #1a1a1a",
+        display: "flex", flexDirection: "column",
+        position: "relative",
+      }}>
+        {/* Status bar */}
+        <div style={{
+          height: 48, background: mode ? COLORS.card : "#FFFFFF",
+          display: "flex", alignItems: "flex-end", justifyContent: "center",
+          padding: "0 24px 4px", fontSize: 13, fontWeight: 600,
+          color: mode ? COLORS.text : "#111111",
+          fontFamily: "'DM Sans', sans-serif",
+        }}>
+          <span>9:41</span>
+        </div>
+
+        {!mode ? (
+          <LoginScreen onLogin={handleLogin} />
+        ) : (
+          <>
+            <Header
+              title={header?.title}
+              subtitle={header?.subtitle}
+              onBack={header?.back ? goBack : null}
+              rightAction={null}
+              showLogo={header?.showLogo}
+            />
+            <div style={{ flex: 1, overflowY: "auto" }}>
+              {renderScreen()}
+            </div>
+            <TabBar
+              activeTab={mode === "admin" ? adminTab : clientTab}
+              onTabChange={handleTabChange}
+              tabs={mode === "admin" ? adminTabs : clientTabs}
+            />
+          </>
+        )}
+      </div>
+
+      {/* Legend */}
+      <div style={{
+        marginTop: 16, fontSize: 12, color: "#888",
+        fontFamily: "'DM Sans', sans-serif", textAlign: "center",
+      }}>
+        Interactive prototype · Click to navigate · Use toggle above to switch views
+      </div>
+    </div>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(<UnleashedApp />);
+  </script>
+</body>
+</html>
