@@ -1,6 +1,6 @@
 /* ===== FOOTER ===== */
 footer {
-    background: #222;
+    background: var(--footer-bg);
     color: var(--white);
     padding: 60px 24px 24px;
 }

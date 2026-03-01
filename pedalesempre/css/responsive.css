@@ -11,10 +11,6 @@
     .hero-buttons {
         justify-content: center;
     }
-    .hero-image {
-        display: none;
-    }
-
     /* Highlights */
     .highlights {
         grid-template-columns: repeat(2, 1fr);
@@ -129,16 +125,6 @@
 
 /* ===== SMALL MOBILE (max-width: 480px) ===== */
 @media (max-width: 480px) {
-    /* Highlights */
-    .highlights {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    /* Products */
-    .products-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
     /* Hero buttons */
     .hero-buttons {
         flex-direction: column;

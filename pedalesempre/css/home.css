@@ -193,7 +193,7 @@
 
 .service-preview-card {
     padding: 32px;
-    background: #f5f5f5;
+    background: var(--gray-light);
     border-radius: 16px;
     border: 1px solid var(--black);
     transition: all 0.3s;

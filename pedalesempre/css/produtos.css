@@ -59,7 +59,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    background: #D32F2F;
+    background: var(--red-sale);
     color: var(--white);
     font-family: var(--font-body);
     font-size: 0.7rem;
@@ -129,5 +129,5 @@
     font-family: var(--font-body);
     font-weight: 600;
     font-size: 1.15rem;
-    color: #D32F2F;
+    color: var(--red-sale);
 }

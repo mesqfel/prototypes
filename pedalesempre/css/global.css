@@ -13,6 +13,9 @@
     --font-body: 'DM Sans', sans-serif;
     --max-width: 1200px;
     --header-height: 70px;
+    --footer-bg: #222222;
+    --text-body: #444444;
+    --red-sale: #D32F2F;
 }
 
 /* ===== RESET ===== */
