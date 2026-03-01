@@ -14,9 +14,28 @@ footer {
     margin-bottom: 48px;
 }
 
-.footer-brand img {
-    height: 48px;
+.footer-logo-text {
+    display: inline-flex;
+    flex-direction: column;
     margin-bottom: 16px;
+}
+
+.footer-logo-pedale {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.5px;
+}
+
+.footer-logo-sempre {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 0.86rem;
+    color: var(--white);
+    text-align: right;
+    line-height: 1.2;
 }
 
 .footer-brand p {
