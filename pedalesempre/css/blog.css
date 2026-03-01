@@ -27,6 +27,36 @@
     object-fit: cover;
 }
 
+/* Card 1: 5 Acessórios (blog-02) */
+.blog-page-grid .blog-full-card:nth-child(1) img {
+    object-position: center 35%;
+}
+
+/* Card 2: Equipamentos de Proteção (blog-04) */
+.blog-page-grid .blog-full-card:nth-child(2) img {
+    object-position: center 20%;
+}
+
+/* Card 3: Ciclovia (blog-03) */
+.blog-page-grid .blog-full-card:nth-child(3) img {
+    object-position: center 25%;
+}
+
+/* Card 4: Mountain Bike (blog-06) */
+.blog-page-grid .blog-full-card:nth-child(4) img {
+    object-position: center 0%;
+}
+
+/* Card 5: Bicicleta Urbana (blog-05) */
+.blog-page-grid .blog-full-card:nth-child(5) img {
+    object-position: center 15%;
+}
+
+/* Card 6: E-Bikes (blog-01) */
+.blog-page-grid .blog-full-card:nth-child(6) img {
+    object-position: center 75%;
+}
+
 .blog-full-card .bfc-body {
     padding: 24px;
 }

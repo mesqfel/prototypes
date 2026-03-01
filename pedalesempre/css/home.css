@@ -154,6 +154,7 @@
     width: 64px;
     height: 64px;
     margin-bottom: 16px;
+    border-radius: 50%;
 }
 
 .highlight-card h3 {
@@ -290,6 +291,15 @@
     width: 100%;
     aspect-ratio: 16/10;
     object-fit: cover;
+    object-position: center 35%;
+}
+
+.blog-grid .blog-card:nth-child(2) .blog-card-img {
+    object-position: center 0%;
+}
+
+.blog-grid .blog-card:nth-child(3) .blog-card-img {
+    object-position: center 75%;
 }
 
 .blog-card-body {
