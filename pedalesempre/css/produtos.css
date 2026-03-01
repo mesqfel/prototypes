@@ -1,0 +1,102 @@
+/* ===== FILTER BAR ===== */
+.filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-mid);
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--gray-mid);
+    border-radius: 30px;
+    background: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--black);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    border-color: var(--green-primary);
+    background: var(--green-primary);
+    color: var(--white);
+}
+
+/* ===== PRODUCTS GRID ===== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.product-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    transition: all 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transform: translateY(-4px);
+}
+
+.product-card-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    background: var(--gray-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-text);
+    font-size: 13px;
+    text-align: center;
+    padding: 16px;
+}
+
+.product-card-body {
+    padding: 16px;
+}
+
+.product-card-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--green-primary);
+    margin-bottom: 6px;
+}
+
+.product-card-body h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.product-card-brand {
+    font-size: 0.8rem;
+    color: var(--gray-text);
+    margin-bottom: 6px;
+}
+
+.product-card-desc {
+    font-size: 0.8rem;
+    color: var(--gray-text);
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.product-card-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--green-primary);
+}

@@ -1,0 +1,63 @@
+/* ===== BLOG PAGE GRID ===== */
+.blog-page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.blog-full-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.blog-full-card:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    transform: translateY(-6px);
+}
+
+.blog-full-card img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+}
+
+.blog-full-card .bfc-body {
+    padding: 24px;
+}
+
+.blog-full-card .bfc-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--green-light);
+    color: var(--green-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+.blog-full-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.blog-full-card p {
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.blog-full-card .read-more {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--green-primary);
+}

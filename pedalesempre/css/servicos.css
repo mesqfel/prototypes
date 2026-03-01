@@ -1,0 +1,145 @@
+/* ===== ACCORDION ===== */
+.accordion {
+    margin-bottom: 16px;
+    border: 1px solid var(--gray-mid);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    padding: 20px 24px;
+    background: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: background 0.2s;
+    user-select: none;
+}
+
+.accordion-header:hover {
+    background: var(--green-light);
+}
+
+.accordion-header .arrow {
+    transition: transform 0.3s;
+    font-size: 0.75rem;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.accordion.open .accordion-header {
+    background: var(--green-primary);
+    color: var(--white);
+}
+
+.accordion.open .arrow {
+    transform: rotate(-135deg);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.accordion.open .accordion-body {
+    max-height: 2000px;
+}
+
+/* ===== SERVICE TABLE ===== */
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.service-table tr {
+    border-bottom: 1px solid var(--gray-mid);
+}
+
+.service-table tr:last-child {
+    border-bottom: none;
+}
+
+.service-table td {
+    padding: 14px 24px;
+    vertical-align: top;
+}
+
+.service-table .st-name {
+    font-weight: 600;
+}
+
+.service-table .st-desc {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    margin-top: 2px;
+}
+
+.service-table .st-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--green-primary);
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* ===== SERVICE NOTES ===== */
+.service-note {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--green-light);
+    border-radius: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.service-note .note-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.service-note p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--black);
+}
+
+.service-note + .service-note {
+    margin-top: 16px;
+}
+
+/* ===== CARD BRANDS ===== */
+.card-brands {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.card-brand {
+    padding: 8px 16px;
+    border: 1px solid var(--gray-mid);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-text);
+}
+
+/* ===== ACCORDION FOOTNOTE ===== */
+.accordion-footnote {
+    padding: 14px 24px;
+    font-size: 0.8rem;
+    color: var(--gray-text);
+}

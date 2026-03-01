@@ -1,0 +1,81 @@
+/* ===== ABOUT GRID ===== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-grid img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+}
+
+.about-grid-img {
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
+.about-text p {
+    color: var(--gray-text);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== ABOUT VALUES ===== */
+.about-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.about-value {
+    text-align: center;
+    padding: 32px 16px;
+}
+
+.about-value .av-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.about-value h3 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.about-value p {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+}
+
+/* ===== BRANDS ===== */
+.brands-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.brand-name {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--gray-text);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.brand-name:hover {
+    opacity: 1;
+    color: var(--green-primary);
+}

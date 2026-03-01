@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Confira bicicletas mountain bike, e-bikes, acessórios e peças das melhores marcas: GIOS, MAZZA, SHIMANO, Absolute e mais. Pedale Sempre, Serra-ES.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.pedalesempre.com.br/produtos.html">
+    <title>Produtos - Bicicletas, E-Bikes, Acessórios e Peças | Pedale Sempre</title>
+    <!-- Open Graph -->
+    <meta property="og:title" content="Produtos - Bicicletas, E-Bikes, Acessórios e Peças | Pedale Sempre">
+    <meta property="og:description" content="Confira bicicletas mountain bike, e-bikes, acessórios e peças das melhores marcas: GIOS, MAZZA, SHIMANO, Absolute e mais. Pedale Sempre, Serra-ES.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pedalesempre.com.br/produtos.html">
+    <meta property="og:image" content="https://www.pedalesempre.com.br/assets/logo.png">
+    <meta property="og:locale" content="pt_BR">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/produtos.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="header-logo">
+            <img src="assets/logo.png" alt="Logo Pedale Sempre" width="120" height="40">
+        </a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <nav id="mainNav" aria-label="Navegação principal">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="produtos.html" class="nav-link active">Produtos</a>
+            <a href="servicos.html" class="nav-link">Serviços</a>
+            <a href="sobre.html" class="nav-link">Sobre Nós</a>
+            <a href="blog.html" class="nav-link">Blog</a>
+            <a href="contato.html" class="nav-link">Contato</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="page-hero">
+        <h1><span class="highlight-label">Produtos</span></h1>
+        <p>Bicicletas, acessórios e peças das melhores marcas</p>
+    </div>
+
+    <section class="section">
+        <div class="section-inner">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterProducts(this, 'todos')">Todos</button>
+                <button class="filter-btn" onclick="filterProducts(this, 'bicicletas')">Bicicletas</button>
+                <button class="filter-btn" onclick="filterProducts(this, 'ebikes')">E-Bikes</button>
+                <button class="filter-btn" onclick="filterProducts(this, 'acessorios')">Acessórios</button>
+                <button class="filter-btn" onclick="filterProducts(this, 'pecas')">Peças</button>
+            </div>
+            <div class="products-grid">
+                <div class="product-card" data-category="bicicletas">
+                    <div class="product-card-img">🚲<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Mountain Bike</div>
+                        <h3>Brutus T9 Aro 29</h3>
+                        <div class="product-card-brand">GIOS</div>
+                        <div class="product-card-desc">Quadro em alumínio, 21 marchas, freio a disco mecânico</div>
+                        <div class="product-card-price">R$ 1.899,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="bicicletas">
+                    <div class="product-card-img">🚲<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Mountain Bike</div>
+                        <h3>FRX Freeride Aro 26</h3>
+                        <div class="product-card-brand">MAZZA</div>
+                        <div class="product-card-desc">Quadro reforçado, suspensão dianteira, 21v</div>
+                        <div class="product-card-price">R$ 2.490,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="ebikes">
+                    <div class="product-card-img">⚡<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">E-Bike</div>
+                        <h3>E-Street Urban 700c</h3>
+                        <div class="product-card-brand">ABSOLUTE</div>
+                        <div class="product-card-desc">Motor 350W, bateria removível, autonomia 60km</div>
+                        <div class="product-card-price">R$ 5.990,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="bicicletas">
+                    <div class="product-card-img">🚲<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Urbana</div>
+                        <h3>City Pro Aro 700</h3>
+                        <div class="product-card-brand">ABSOLUTE</div>
+                        <div class="product-card-desc">Leve e confortável, perfeita para o dia a dia</div>
+                        <div class="product-card-price">R$ 1.299,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="acessorios">
+                    <div class="product-card-img">🪖<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Acessório</div>
+                        <h3>Capacete MTB Pro</h3>
+                        <div class="product-card-brand">ABSOLUTE</div>
+                        <div class="product-card-desc">Ventilação otimizada, ajuste micrométrico, LED traseiro</div>
+                        <div class="product-card-price">R$ 189,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="acessorios">
+                    <div class="product-card-img">💡<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Acessório</div>
+                        <h3>Kit Farol + Lanterna LED</h3>
+                        <div class="product-card-brand">PRO-X</div>
+                        <div class="product-card-desc">Recarregável USB, 3 modos, resistente à água</div>
+                        <div class="product-card-price">R$ 79,90</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="pecas">
+                    <div class="product-card-img">⚙️<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Peça</div>
+                        <h3>Kit Transmissão 21v</h3>
+                        <div class="product-card-brand">SHIMANO</div>
+                        <div class="product-card-desc">Câmbio dianteiro, traseiro, passadores e cassete</div>
+                        <div class="product-card-price">R$ 349,00</div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="pecas">
+                    <div class="product-card-img">⚙️<br>Imagem do Produto</div>
+                    <div class="product-card-body">
+                        <div class="product-card-category">Peça</div>
+                        <h3>Pneu Street Go 29x2.0</h3>
+                        <div class="product-card-brand">STREET GO</div>
+                        <div class="product-card-desc">Alta durabilidade, excelente aderência, kevlar</div>
+                        <div class="product-card-price">R$ 89,90</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="assets/logo.png" alt="Pedale Sempre" width="120" height="48">
+            <p>Venda, manutenção e serviços especializados em bicicletas. Mais que um incentivo!</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navegação</h4>
+            <a href="index.html">Home</a>
+            <a href="produtos.html">Produtos</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="sobre.html">Sobre Nós</a>
+            <a href="blog.html">Blog</a>
+            <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer-col">
+            <h4>Serviços</h4>
+            <a href="servicos.html">Montagem</a>
+            <a href="servicos.html">Revisões</a>
+            <a href="servicos.html">Regulagem</a>
+            <a href="servicos.html">E-Bikes</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contato</h4>
+            <a href="tel:+552733377014">(027) 3337-7014</a>
+            <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#101;&#100;&#97;&#108;&#101;&#115;&#101;&#109;&#112;&#114;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#112;&#101;&#100;&#97;&#108;&#101;&#115;&#101;&#109;&#112;&#114;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>
+            <a href="https://www.instagram.com/pedalesempre">@pedalesempre</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Pedale Sempre. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/552733377014" class="whatsapp-float" title="Fale conosco no WhatsApp">💬</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>
