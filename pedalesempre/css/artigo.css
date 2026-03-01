@@ -46,11 +46,12 @@
 .article-meta {
     font-size: 0.85rem;
     color: var(--gray-text);
-    margin-bottom: 32px;
+    margin-bottom: 10px;
 }
 
 .article-cover {
     width: 100%;
+    height: auto;
     border-radius: 12px;
     margin-bottom: 32px;
 }
