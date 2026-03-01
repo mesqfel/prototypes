@@ -49,9 +49,25 @@
 }
 
 .product-card-img {
+    position: relative;
     aspect-ratio: 3/4;
     overflow: hidden;
     background: var(--gray-light);
+}
+
+.product-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #D32F2F;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 4px;
+    z-index: 1;
 }
 
 .product-card-img img {
@@ -98,4 +114,20 @@
     font-weight: 600;
     font-size: 1.15rem;
     color: var(--green-primary);
+}
+
+.product-card-price-original {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gray-text);
+    text-decoration: line-through;
+    margin-bottom: 2px;
+}
+
+.product-card-price-sale {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #D32F2F;
 }
