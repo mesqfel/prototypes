@@ -670,6 +670,14 @@ button { font-family: var(--font); }
   line-height: 1.8;
   margin-bottom: 20px;
 }
+.article__content a {
+  color: var(--black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.article__content a:hover {
+  color: var(--grey-600);
+}
 .article__author {
   margin-top: 56px;
   padding: 32px;
