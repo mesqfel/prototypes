@@ -17,6 +17,9 @@
   <meta name="twitter:description" content="Evidence-based articles on dog behaviour, training techniques, and building a better relationship with your dog. By Unleashed Canine Academy, Gold Coast." />
   <meta name="twitter:image" content="https://mesqfel.github.io/prototypes/unleashed-website/assets/og-image.jpg" />
   <link rel="canonical" href="https://mesqfel.github.io/prototypes/unleashed-website/blog.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/styles.css" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -25,7 +28,7 @@
   <nav class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
-        <img src="./assets/logo.png" alt="Unleashed" />
+        <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
         <span>Unleashed</span>
       </a>
       <button class="nav__hamburger" onclick="this.classList.toggle('nav__hamburger--open'); document.querySelector('.nav__links').classList.toggle('nav__links--open');" aria-label="Menu">
@@ -61,7 +64,7 @@
       <div class="container">
         <a href="blog-1.html" class="blog-card">
           <div class="blog-card__image">
-            <img src="./assets/blog-1.jpg" alt="Why dominance theory is outdated" />
+            <img src="./assets/blog-1.jpg" alt="Why dominance theory is outdated" width="400" height="266" loading="lazy" />
           </div>
           <div class="blog-card__body">
             <div class="blog-card__meta">
@@ -77,7 +80,7 @@
 
         <a href="blog-2.html" class="blog-card">
           <div class="blog-card__image">
-            <img src="./assets/blog-2.jpg" alt="5 signs your dog is stressed" />
+            <img src="./assets/blog-2.jpg" alt="5 signs your dog is stressed" width="400" height="400" loading="lazy" />
           </div>
           <div class="blog-card__body">
             <div class="blog-card__meta">
@@ -93,7 +96,7 @@
 
         <a href="blog-3.html" class="blog-card">
           <div class="blog-card__image">
-            <img src="./assets/blog-3.jpg" alt="Structured social sessions for reactive dogs" />
+            <img src="./assets/blog-3.jpg" alt="Structured social sessions for reactive dogs" width="400" height="240" loading="lazy" />
           </div>
           <div class="blog-card__body">
             <div class="blog-card__meta">
@@ -109,7 +112,7 @@
 
         <a href="blog-4.html" class="blog-card">
           <div class="blog-card__image">
-            <img src="./assets/blog-4.jpg" alt="Board & Train: what to expect" />
+            <img src="./assets/blog-4.jpg" alt="Board & Train: what to expect" width="400" height="266" loading="lazy" />
           </div>
           <div class="blog-card__body">
             <div class="blog-card__meta">

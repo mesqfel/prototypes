@@ -17,6 +17,9 @@
   <meta name="twitter:description" content="Meet Eric and the team behind Unleashed Canine Academy. Over 8 years of experience in science-based dog training on the Gold Coast." />
   <meta name="twitter:image" content="https://mesqfel.github.io/prototypes/unleashed-website/assets/og-image.jpg" />
   <link rel="canonical" href="https://mesqfel.github.io/prototypes/unleashed-website/about.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/styles.css" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -25,7 +28,7 @@
   <nav class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
-        <img src="./assets/logo.png" alt="Unleashed" />
+        <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
         <span>Unleashed</span>
       </a>
       <button class="nav__hamburger" onclick="this.classList.toggle('nav__hamburger--open'); document.querySelector('.nav__links').classList.toggle('nav__links--open');" aria-label="Menu">
@@ -56,7 +59,7 @@
     <section class="section">
       <div class="about-profile">
         <div class="about-profile__photo">
-          <img src="./assets/eric.jpg" alt="Eric - Founder of Unleashed" />
+          <img src="./assets/eric.jpg" alt="Eric - Founder of Unleashed" width="500" height="462" loading="lazy" />
         </div>
         <div class="about-profile__info">
           <div class="about-profile__role">FOUNDER &amp; HEAD TRAINER</div>
