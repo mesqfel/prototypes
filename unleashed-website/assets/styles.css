@@ -670,12 +670,12 @@ button { font-family: var(--font); }
   line-height: 1.8;
   margin-bottom: 20px;
 }
-.article__content a {
+.article__content p a {
   color: var(--black);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.article__content a:hover {
+.article__content p a:hover {
   color: var(--grey-600);
 }
 .article__author {
