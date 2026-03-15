@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Unleashed Canine Academy — Gold Coast Dog Training</title>
   <meta name="description" content="Science-based dog training on the Gold Coast. Private lessons, group social sessions, board & train programs. We may not be your first dog trainer, but we will be your last." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/styles.css" as="style" />
+  <link rel="preload" href="./assets/hero.jpg" as="image" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -14,7 +18,7 @@
   <nav class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
-        <img src="./assets/logo.png" alt="Unleashed" />
+        <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
         <span>Unleashed</span>
       </a>
       <button class="nav__hamburger" onclick="this.classList.toggle('nav__hamburger--open'); document.querySelector('.nav__links').classList.toggle('nav__links--open');" aria-label="Menu">
@@ -51,7 +55,7 @@
           </div>
         </div>
         <div class="hero__image">
-          <img src="./assets/hero.jpg" alt="Eric training dogs on the Gold Coast beach" />
+          <img src="./assets/hero.jpg" alt="Eric training dogs on the Gold Coast beach" width="600" height="681" loading="eager" fetchpriority="high" />
         </div>
       </div>
     </section>

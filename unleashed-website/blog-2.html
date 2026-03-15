@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>5 signs your dog is stressed (that most owners miss) — Unleashed Blog</title>
   <meta name="description" content="Lip licking, whale eyes, and shake-offs aren't just quirks. Learn to read your dog's body language like a professional trainer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/styles.css" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -13,7 +16,7 @@
   <nav class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
-        <img src="./assets/logo.png" alt="Unleashed" />
+        <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
         <span>Unleashed</span>
       </a>
       <button class="nav__hamburger" onclick="this.classList.toggle('nav__hamburger--open'); document.querySelector('.nav__links').classList.toggle('nav__links--open');" aria-label="Menu">
@@ -47,7 +50,7 @@
 
     <section style="padding: 48px 32px 0;">
       <div class="article__featured-image">
-        <img src="./assets/blog-2.jpg" alt="5 signs your dog is stressed" />
+        <img src="./assets/blog-2.jpg" alt="5 signs your dog is stressed" width="400" height="400" loading="lazy" />
       </div>
     </section>
 
@@ -83,7 +86,7 @@
 
         <div class="article__author">
           <div class="article__author-photo">
-            <img src="./assets/eric.jpg" alt="Eric" />
+            <img src="./assets/eric.jpg" alt="Eric" width="500" height="462" loading="lazy" />
           </div>
           <div>
             <div class="article__author-name">Written by Eric</div>

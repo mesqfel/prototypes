@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Contact — Unleashed Canine Academy</title>
   <meta name="description" content="Get in touch about your dog's training. Email, phone, or visit Unleashed Canine Academy on the Gold Coast. We'd love to hear from you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="assets/styles.css" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -13,7 +16,7 @@
   <nav class="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
-        <img src="./assets/logo.png" alt="Unleashed" />
+        <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
         <span>Unleashed</span>
       </a>
       <button class="nav__hamburger" onclick="this.classList.toggle('nav__hamburger--open'); document.querySelector('.nav__links').classList.toggle('nav__links--open');" aria-label="Menu">
