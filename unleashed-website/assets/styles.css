@@ -1,3 +1,16 @@
+/* ============ SKIP LINK ============ */
+.skip-link { position: absolute; top: -40px; left: 0; padding: 8px; background: #000; color: #fff; z-index: 100; }
+.skip-link:focus { top: 0; }
+
+/* ============ RELATED POSTS ============ */
+.related-posts { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--grey-200); }
+.related-posts__title { font-size: 20px; font-weight: 700; color: var(--black); margin-bottom: 20px; }
+.related-posts__list { display: flex; flex-direction: column; gap: 16px; }
+.related-posts__link { display: block; padding: 16px 20px; border: 1px solid var(--grey-200); text-decoration: none; transition: border-color 0.15s; }
+.related-posts__link:hover { border-color: var(--black); }
+.related-posts__link-title { font-size: 16px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.related-posts__link-desc { font-size: 14px; color: var(--grey-500); }
+
 /* ============ DESIGN TOKENS ============ */
 :root {
   --black: #0A0A0A;

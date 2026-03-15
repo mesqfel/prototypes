@@ -47,8 +47,9 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
         <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
@@ -68,7 +69,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <section class="section section--grey" style="padding-bottom: 48px;">
       <div class="article-container">
         <a href="blog.html" class="article__back">← Back to Blog</a>
@@ -95,7 +96,7 @@
         <p>The key word is structured. This isn't a dog park free-for-all. It's a carefully managed environment where every interaction is intentional.</p>
 
         <h2>What makes a session "structured"?</h2>
-        <p>At Unleashed, our Structured Social Sessions are built on a few core principles that separate them from casual dog park visits:</p>
+        <p>At Unleashed, our <a href="services.html">Structured Social Sessions</a> are built on a few core principles that separate them from casual dog park visits:</p>
         <p>Controlled introductions. Dogs don't just get thrown together. Each dog is assessed individually, and pairings are made based on energy levels, temperament, and current emotional state. A nervous border collie isn't paired with a high-energy boxer on their first session.</p>
         <p>Trainer-led activities. Every session has a purpose. We cycle through group obedience, impulse control exercises, parallel walking, and guided play. This gives dogs a job to focus on rather than fixating on each other.</p>
         <p>Clear boundaries and rest periods. Dogs get regular breaks. Arousal levels are monitored constantly, and any dog showing signs of stress or over-excitement is calmly removed for a reset. This prevents the emotional flooding that happens at chaotic dog parks.</p>
@@ -130,11 +131,25 @@
           <a href="blog.html" class="article__all-link">← All articles</a>
           <a href="booking.html" class="article__book-link">BOOK A SESSION</a>
         </div>
+
+        <div class="related-posts">
+          <div class="related-posts__title">Related Articles</div>
+          <div class="related-posts__list">
+            <a href="blog-2.html" class="related-posts__link">
+              <div class="related-posts__link-title">5 signs your dog is stressed (that most owners miss)</div>
+              <div class="related-posts__link-desc">Learn to read your dog's body language like a professional trainer.</div>
+            </a>
+            <a href="blog-4.html" class="related-posts__link">
+              <div class="related-posts__link-title">Board &amp; Train: what to expect and how to prepare</div>
+              <div class="related-posts__link-desc">Everything you need to know about our most immersive training program.</div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" aria-label="Footer navigation">
     <div class="footer__grid">
       <div class="footer__col footer__col--brand">
         <div class="footer__brand">Unleashed</div>

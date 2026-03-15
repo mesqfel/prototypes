@@ -47,8 +47,9 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
         <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
@@ -68,7 +69,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <!-- Article header -->
     <section class="section section--grey" style="padding-bottom: 48px;">
       <div class="article-container">
@@ -106,7 +107,7 @@
         <p>Understanding this distinction matters because it changes how you respond. Instead of punishing unwanted behaviour (which often creates anxiety and confusion), you can redirect it and reinforce what you actually want.</p>
 
         <h2>What to do instead</h2>
-        <p>At Unleashed, our approach is built on three principles grounded in behavioural science:</p>
+        <p>At Unleashed, our approach is built on three principles grounded in behavioural science. You can see how we apply these in all of our <a href="services.html">training programs</a>:</p>
         <p>Communication over correction. We teach you and your dog a shared language using conditioned markers — clear signals that tell your dog exactly what behaviour you're rewarding. This removes ambiguity and builds trust.</p>
         <p>Management over confrontation. Instead of waiting for your dog to fail and then correcting them, we set up environments where they're more likely to succeed. Prevention is more effective than punishment.</p>
         <p>Reinforcement over suppression. Behaviours that get reinforced get repeated. We focus on rewarding the behaviours you want to see more of, rather than trying to stamp out the ones you don't.</p>
@@ -131,11 +132,25 @@
           <a href="blog.html" class="article__all-link">← All articles</a>
           <a href="booking.html" class="article__book-link">BOOK A SESSION</a>
         </div>
+
+        <div class="related-posts">
+          <div class="related-posts__title">Related Articles</div>
+          <div class="related-posts__list">
+            <a href="blog-2.html" class="related-posts__link">
+              <div class="related-posts__link-title">5 signs your dog is stressed (that most owners miss)</div>
+              <div class="related-posts__link-desc">Learn to read your dog's body language like a professional trainer.</div>
+            </a>
+            <a href="blog-3.html" class="related-posts__link">
+              <div class="related-posts__link-title">The power of structured social sessions for reactive dogs</div>
+              <div class="related-posts__link-desc">How controlled group environments can transform a reactive dog into a confident companion.</div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" aria-label="Footer navigation">
     <div class="footer__grid">
       <div class="footer__col footer__col--brand">
         <div class="footer__brand">Unleashed</div>

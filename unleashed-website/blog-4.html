@@ -47,8 +47,9 @@
   </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
         <img src="./assets/logo.png" alt="Unleashed" width="200" height="200" loading="eager" fetchpriority="high" />
@@ -68,7 +69,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <section class="section section--grey" style="padding-bottom: 48px;">
       <div class="article-container">
         <a href="blog.html" class="article__back">← Back to Blog</a>
@@ -115,7 +116,7 @@
 
         <h2>The Unleashed difference</h2>
         <p>What sets our Board &amp; Train apart is the combination of science-based methods, genuine care, and comprehensive owner education. We don't just train your dog and hand them back — we train your whole family so the results last a lifetime.</p>
-        <p>Interested in Board &amp; Train for your dog? Start with a First Private Lesson and we'll build a tailored plan together.</p>
+        <p>Interested in Board &amp; Train for your dog? Start with a <a href="services.html">First Private Lesson</a> and we'll build a tailored plan together.</p>
 
         <div class="article__author">
           <div class="article__author-photo">
@@ -131,11 +132,25 @@
           <a href="blog.html" class="article__all-link">← All articles</a>
           <a href="booking.html" class="article__book-link">BOOK A SESSION</a>
         </div>
+
+        <div class="related-posts">
+          <div class="related-posts__title">Related Articles</div>
+          <div class="related-posts__list">
+            <a href="blog-1.html" class="related-posts__link">
+              <div class="related-posts__link-title">Why dominance theory is outdated — and what to do instead</div>
+              <div class="related-posts__link-desc">Modern behavioural science has moved far beyond the alpha-wolf myth.</div>
+            </a>
+            <a href="blog-3.html" class="related-posts__link">
+              <div class="related-posts__link-title">The power of structured social sessions for reactive dogs</div>
+              <div class="related-posts__link-desc">How controlled group environments can transform a reactive dog into a confident companion.</div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" aria-label="Footer navigation">
     <div class="footer__grid">
       <div class="footer__col footer__col--brand">
         <div class="footer__brand">Unleashed</div>
