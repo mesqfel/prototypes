@@ -9,8 +9,9 @@
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
-  <nav class="nav">
+  <nav class="nav" aria-label="Main navigation">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
         <img src="./assets/logo.png" alt="Unleashed" />
@@ -30,7 +31,7 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main-content">
     <section class="section section--grey" style="padding-bottom: 48px;">
       <div class="article-container">
         <a href="blog.html" class="article__back">← Back to Blog</a>
@@ -78,7 +79,7 @@
 
         <h2>Why this matters</h2>
         <p>Most behavioural problems in dogs don't come out of nowhere. They build gradually as subtle signals go unnoticed and unaddressed. A dog that bites "without warning" almost certainly gave dozens of warnings — lip licks, whale eyes, yawns, freeze responses — that were missed or ignored.</p>
-        <p>By learning to read these early signals, you can intervene before your dog reaches their threshold. You can remove stressors, create distance, and show your dog that you're paying attention to what they're telling you.</p>
+        <p>By learning to read these early signals, you can intervene before your dog reaches their threshold. You can remove stressors, create distance, and show your dog that you're paying attention to what they're telling you. In our <a href="services.html">private lessons</a>, we teach you how to recognise and respond to these signals in real time.</p>
         <p>That's the foundation of a trusting relationship — and it starts with learning to listen with your eyes.</p>
 
         <div class="article__author">
@@ -95,11 +96,25 @@
           <a href="blog.html" class="article__all-link">← All articles</a>
           <a href="booking.html" class="article__book-link">BOOK A SESSION</a>
         </div>
+
+        <div class="related-posts">
+          <div class="related-posts__title">Related Articles</div>
+          <div class="related-posts__list">
+            <a href="blog-1.html" class="related-posts__link">
+              <div class="related-posts__link-title">Why dominance theory is outdated — and what to do instead</div>
+              <div class="related-posts__link-desc">Modern behavioural science has moved far beyond the alpha-wolf myth.</div>
+            </a>
+            <a href="blog-3.html" class="related-posts__link">
+              <div class="related-posts__link-title">The power of structured social sessions for reactive dogs</div>
+              <div class="related-posts__link-desc">How controlled group environments can transform a reactive dog into a confident companion.</div>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" aria-label="Footer navigation">
     <div class="footer__grid">
       <div class="footer__col footer__col--brand">
         <div class="footer__brand">Unleashed</div>
