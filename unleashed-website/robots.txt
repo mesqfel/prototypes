@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mesqfel.github.io/prototypes/unleashed-website/sitemap.xml
