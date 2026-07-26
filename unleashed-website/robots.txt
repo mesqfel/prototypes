@@ -1,3 +1,5 @@
+# Crawling is intentionally allowed: every page carries a noindex meta tag,
+# and Google must be able to fetch the pages in order to read it.
+# Blocking crawl here would leave already-known URLs stuck in the index.
 User-agent: *
 Allow: /
-Sitemap: https://mesqfel.github.io/prototypes/unleashed-website/sitemap.xml
