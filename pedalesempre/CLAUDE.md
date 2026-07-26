@@ -235,7 +235,9 @@ Cada página DEVE usar tags semânticas corretas:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="[Descrição única por página, 150-160 chars]">
-    <meta name="robots" content="index, follow">
+    <!-- Enquanto o site estiver hospedado no GitHub Pages (staging), TODAS as páginas
+         devem ter noindex. Só trocar para "index, follow" quando publicar no domínio final. -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
     <link rel="canonical" href="https://www.pedalesempre.com.br/[pagina].html">
     <title>[Título da Página] | Pedale Sempre</title>
     <!-- Open Graph -->
